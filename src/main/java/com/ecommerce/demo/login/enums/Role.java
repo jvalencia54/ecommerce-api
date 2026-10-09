@@ -1,6 +1,6 @@
 package com.ecommerce.demo.login.enums;
 
-public enum RolEnum {
+public enum Role {
     ADMIN(1, "ROLE_ADMIN"),
     CLIENTE(2, "ROLE_CLIENTE");
 
@@ -20,7 +20,6 @@ public enum RolEnum {
         return authority;
     }
 
-    // Método para obtener el Role a partir del ID numérico de PostgreSQL
     public static Role fromId(int id) {
         for (Role role : Role.values()) {
             if (role.getId() == id) {

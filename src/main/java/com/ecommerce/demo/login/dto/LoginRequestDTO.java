@@ -1,4 +1,4 @@
-package com.ecommerce.demo.login;
+package com.ecommerce.demo.login.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

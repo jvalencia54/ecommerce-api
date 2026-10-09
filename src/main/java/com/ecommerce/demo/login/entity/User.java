@@ -1,6 +1,10 @@
 package com.ecommerce.demo.login.entity;
 
+import com.ecommerce.demo.login.enums.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +14,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Data
+@AllArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -23,53 +29,25 @@ public class User implements UserDetails {
     private String password;
 
     @Column(nullable = false)
-    private String role; // Ejemplo: "ROLE_USER", "ROLE_ADMIN"
+    private Integer role;
 
     private boolean enabled = true;
 
     public User() {}
 
-    public User(String username, String password, String role) {
+    public User(String username, String password, Integer role) {
         this.username = username;
         this.password = password;
         this.role = role;
     }
 
-    // Getters y Setters
-
-    public Long getId() {
-        return id;
+    public Role getRoleEnum() {
+        return Role.fromId(this.role);
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    // Métodos requeridos por UserDetails
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role));
+        return List.of(new SimpleGrantedAuthority(getRoleEnum().getAuthority()));
     }
 
     @Override

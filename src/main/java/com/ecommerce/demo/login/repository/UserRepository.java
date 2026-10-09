@@ -1,4 +1,4 @@
-package com.ecommerce.demo.login;
+package com.ecommerce.demo.login.repository;
 
 import com.ecommerce.demo.login.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
